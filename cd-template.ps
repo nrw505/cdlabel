@@ -1,0 +1,56 @@
+% Tray Dimensions: width=131mm height=239mm
+% CD Dimensions: radius = 2.325in hole = 58.5 pt (?)
+% Begin test
+
+/inch { 72 mul } def
+/mm { 2.8346457 mul } def
+/circle { 0 360 arc } def
+/radius { 2.325 inch } def
+/innerradius { 22.5 mm } def
+/Fh { 10 } def
+/TitleFh { 12 } def
+/MaxFh { 12 } def
+/chartostring { 1 string dup 0 4 -1 roll put } def
+/getrotation { userdict /currentrotation get } def
+/setrotation { userdict /currentrotation 3 -1 roll put } def
+/calcoffset { getrotation 360 add MaxFh mul 360 div } def
+
+48 mm radius add 54 mm radius add translate
+0 0 radius circle
+0 0 innerradius circle
+clip newpath
+0 0 moveto
+0 setrotation
+
+/Helvetica-Bold findfont TitleFh scalefont setfont
+
+gsave
+
+0 radius calcoffset sub moveto
+{
+    grestore gsave
+    exch chartostring stringwidth pop
+    radius calcoffset sub atan getrotation add setrotation
+    getrotation neg rotate 0 radius calcoffset sub moveto
+    pop
+}
+(__TITLE__) kshow
+grestore
+
+/Helvetica findfont Fh scalefont setfont
+
+getrotation 5 add setrotation
+
+gsave
+getrotation neg rotate 0 radius calcoffset sub moveto
+{
+    grestore gsave
+    exch chartostring stringwidth pop
+    radius calcoffset sub atan getrotation add setrotation
+    getrotation neg rotate 0 radius calcoffset sub moveto
+    pop
+}
+(__TRACKS__) kshow
+grestore
+showpage
+% End

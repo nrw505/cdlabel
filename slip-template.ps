@@ -1,0 +1,86 @@
+%!PS-Adobe-2.0
+%%Creator: nigelw
+%%Title: CDSlip.ps
+%%Pages: 1
+%%PageOrder: Ascend
+%%DocumentPaperSizes: A4
+%%DocumentNeededResources: font Helvetica Helvetica-Bold
+%%LanguageLevel: 1
+%%EndComments
+
+%%BeginProlog
+/mm { 2.8346457 mul } def
+/artistfont { /Helvetica-Bold } def
+/artistsize { 18 } def
+/titlefont { /Helvetica } def
+/titlesize { 16 } def
+/trackfont { /Helvetica } def
+/tracksize { 10 } def
+/ARTIST { (__ARTIST__) } def
+/TITLE { (__TITLE__) } def
+/NTRACKS { (__NTRACKS__) } def
+
+/getyfortrack { 1 sub tracksize mul 80 mm exch sub } def
+% tracknum name length --
+/showtrack {
+% get length X
+    dup stringwidth pop 105 mm exch sub
+% get length Y
+    3 index getyfortrack
+% show length
+    moveto show
+    15 mm 2 index getyfortrack moveto show
+    dup 5 mm exch getyfortrack moveto 3 string cvs show
+} def
+%%EndProlog
+
+%%BeginSetup
+gsave
+%%EndSetup
+
+%%Page: 1 1
+20 mm 20 mm translate
+
+/centershow { dup stringwidth pop 2 div neg 0 rmoveto show } def
+
+/getmaxwidth { userdict /maxwidth get } def
+/setmaxwidth { userdict /maxwidth 3 -1 roll put } def
+
+/settracklist { userdict /tracklist 3 -1 roll put } def
+/gettracklist { userdict /tracklist get } def
+
+0 0 moveto
+0 110 mm lineto
+110 mm 110 mm lineto
+110 mm 0 lineto
+0 0 lineto
+closepath
+stroke newpath
+
+artistfont findfont artistsize scalefont setfont
+
+55 mm 100 mm moveto
+ARTIST centershow
+ARTIST stringwidth pop
+
+titlefont findfont titlesize scalefont setfont
+
+55 mm 92 mm moveto
+TITLE centershow
+TITLE stringwidth pop
+
+max setmaxwidth
+
+55 mm getmaxwidth 2 div sub 1 mm sub 90 mm moveto
+55 mm getmaxwidth 2 div sub 1 mm sub 100 mm titlesize add lineto
+55 mm getmaxwidth 2 div add 1 mm add 100 mm titlesize add lineto
+55 mm getmaxwidth 2 div add 1 mm add 90 mm lineto
+closepath stroke newpath
+
+trackfont findfont tracksize scalefont setfont
+__TRACKS__
+
+showpage
+grestore
+%%Trailer
+%%EOF
